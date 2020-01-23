@@ -8,7 +8,7 @@ const screens = {
     screen: ShoppingList,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header title="Planer" navigation={navigation} />
+        headerTitle: () => <Header title="Zakupy" navigation={navigation} />
       };
     }
   }

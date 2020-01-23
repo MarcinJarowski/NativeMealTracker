@@ -4,9 +4,9 @@ import { createAppContainer } from "react-navigation";
 
 // stacks
 import PlannerStack from "./plannerStack";
-// import ProfilePageStack from "./profilePageStack";
+import ProfilePageStack from "./profilePageStack";
 import ShoppingListStack from "./shoppingStack";
-// import MealsLibraryStack from "./mealsLibraryStack";
+import MealsLibraryStack from "./mealsLibraryStack";
 
 // drawer navigation options
 const RootDrawerNavigator = createDrawerNavigator({
@@ -15,6 +15,12 @@ const RootDrawerNavigator = createDrawerNavigator({
   },
   Zakupy: {
     screen: ShoppingListStack
+  },
+  Posiłki: {
+    screen: MealsLibraryStack
+  },
+  Profil: {
+    screen: ProfilePageStack
   }
 });
 
