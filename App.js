@@ -1,19 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import DateContextProvider from "./contexts/dateContext";
+import MealsContextProvider from "./contexts/mealsContext";
+import Navigator from "./routes/menuDrawer";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <DateContextProvider>
+      <MealsContextProvider>
+        <Navigator />
+      </MealsContextProvider>
+    </DateContextProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

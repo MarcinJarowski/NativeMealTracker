@@ -2,10 +2,29 @@ import React, { useState, createContext, useEffect } from "react";
 // import moment from "moment";
 import uuid from "uuid";
 
-export const MealsContext = createContext();
+export const MealsContext = createContext({});
 
 const MealsContextProvider = props => {
   //wszystkie dostepne posilki // tutaj bez daty //
+
+  const [breakfastMeals, setBreakFastMeals] = useState(meals);
+  const [mealType, setMealType] = useState("");
+  const mealTypesNames = ["Śniadanie", "Obiad", "Kolacja"];
+  const [mealsArrayByMealTime, setMealsArrayByMealTime] = useState([]);
+  const [selectedMealId, setSelectedMealId] = useState();
+  const [selectedFromSearch, setSelectedFromSearch] = useState(false);
+
+  useEffect(() => {
+    handleMealsArrayType();
+  }, [mealType]);
+
+  // const [selectedMealObject, setSelectedMealObject] = useState({});
+  /////////////////////////////////////////////////////////////
+  // const addNewMeal = newMeal => {
+  //   const updatedBreakfastMeals = [...breakfastMeals, newMeal];
+  // };
+  ////////////////////////////////////
+
   let basicMealsJSON = {
     mealsArray: [
       {
@@ -177,19 +196,6 @@ const MealsContextProvider = props => {
       mealId: uuid()
     }
   ];
-
-  const [breakfastMeals, setBreakFastMeals] = useState(meals);
-  /////////////////////////////////////////////////////////////
-  // const addNewMeal = newMeal => {
-  //   const updatedBreakfastMeals = [...breakfastMeals, newMeal];
-  // };
-  ////////////////////////////////////
-  const [mealType, setMealType] = useState("");
-  const mealTypesNames = ["Śniadanie", "Obiad", "Kolacja"];
-  const [mealsArrayByMealTime, setMealsArrayByMealTime] = useState([]);
-  const [selectedMealId, setSelectedMealId] = useState();
-  // const [selectedMealObject, setSelectedMealObject] = useState({});
-  const [selectedFromSearch, setSelectedFromSearch] = useState(false);
   const handleMealsArrayType = () => {
     let mealsArrayForSearchByMealTime = basicMealsJSON.mealsArray.filter(
       meal => meal.type === mealType.toLowerCase()
@@ -214,9 +220,7 @@ const MealsContextProvider = props => {
   // useEffect(() => {
   //   findSelectedMealFromScheduled();
   // }, [selectedMealId]);
-  useEffect(() => {
-    handleMealsArrayType();
-  }, [mealType]);
+
   return (
     <MealsContext.Provider
       value={{
