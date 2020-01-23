@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation-stack";
 import React from "react";
-import Header from "../components/Header.js";
+import Header from "../components/navigation/Header";
 import MealsLibrary from "../screens/MealsLibrary.js";
 
 const screens = {

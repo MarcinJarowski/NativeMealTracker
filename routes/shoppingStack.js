@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation-stack";
 import React from "react";
-import Header from "../components/Header.js";
+import Header from "../components/navigation/Header";
 import ShoppingList from "../screens/ShoppingList.js";
 
 const screens = {
@@ -17,7 +17,7 @@ const screens = {
 // home stack navigator screens
 const ShoppingListStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerTintColor: "#444",
+    headerTintColor: "#fff",
     headerStyle: { backgroundColor: "#eee", height: 60 }
   }
 });
