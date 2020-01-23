@@ -23,7 +23,7 @@ const RootDrawerNavigator = createDrawerNavigator(
         )
       }
     },
-    Zakupy: {
+    "Lista zakupów": {
       screen: ShoppingListStack,
       navigationOptions: {
         drawerIcon: ({ tintColor }) => (

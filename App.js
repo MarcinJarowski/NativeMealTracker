@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
 import DateContextProvider from "./contexts/dateContext";
 import MealsContextProvider from "./contexts/mealsContext";
 import Navigator from "./routes/menuDrawer";
@@ -8,7 +8,13 @@ export default function App() {
   return (
     <DateContextProvider>
       <MealsContextProvider>
-        <Navigator />
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+        >
+          <Navigator />
+        </TouchableWithoutFeedback>
       </MealsContextProvider>
     </DateContextProvider>
   );

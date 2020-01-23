@@ -8,7 +8,9 @@ const screens = {
     screen: ShoppingList,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header title="Zakupy" navigation={navigation} />
+        headerTitle: () => (
+          <Header title="Lista zakupów" navigation={navigation} />
+        )
       };
     }
   }
@@ -17,7 +19,7 @@ const screens = {
 // home stack navigator screens
 const ShoppingListStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerTintColor: "#fff",
+    headerTintColor: "#444",
     headerStyle: { backgroundColor: "#eee", height: 60 }
   }
 });
