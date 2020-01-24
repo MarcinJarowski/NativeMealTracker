@@ -53,10 +53,8 @@ const RootDrawerNavigator = createDrawerNavigator(
     drawerWidth: vw(75),
     hideStatusBar: true,
     drawerType: "slide",
-    drawerPosition: "right",
+    drawerPosition: "left",
     contentOptions: {
-      activeBackgroundColor: "#red",
-
       itemStyle: {
         alignItems: "center",
         alignSelf: "center",
