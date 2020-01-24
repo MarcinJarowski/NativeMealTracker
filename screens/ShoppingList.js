@@ -46,7 +46,7 @@ export default function ShoppingList() {
     productName: yup
       .string()
       .required()
-      .min(4)
+      .min(3)
   });
   const addNewProduct = (values, actions) => {
     const newProduct = {
@@ -86,7 +86,7 @@ export default function ShoppingList() {
                     />
                     <Text style={globalStyles.errorText}>
                       {props.touched.productName && props.errors.productName
-                        ? "Przynajmniej 4 znaki"
+                        ? "Przynajmniej 3 znaki"
                         : null}
                     </Text>
                     <View style={styles.counter}>
@@ -159,7 +159,7 @@ export default function ShoppingList() {
             })}
           </View>
         </ScrollView>
-        <View style={styles.footerBootons}>
+        <View style={styles.footerBottons}>
           <FlatButton textValue="Wyczyść listę" onPress={clearList} />
         </View>
       </ScrollView>
@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
   formWrapper: {
     width: vw(90),
     height: vh(30),
-    padding: vw(3)
+    padding: vw(3),
+    alignSelf: "center"
   },
   listUl: {
     marginBottom: 10
@@ -233,5 +234,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     textAlign: "center",
     paddingHorizontal: 20
+  },
+  footerBottons: {
+    marginTop: vw(5)
   }
 });

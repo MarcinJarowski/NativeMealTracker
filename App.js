@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
+import React from "react";
 import DateContextProvider from "./contexts/dateContext";
 import MealsContextProvider from "./contexts/mealsContext";
 import ShoppingListContextProvider from "./contexts/shoppingListContext";
@@ -16,12 +15,3 @@ export default function App() {
     </DateContextProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

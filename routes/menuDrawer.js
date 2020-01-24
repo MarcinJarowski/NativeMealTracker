@@ -59,7 +59,7 @@ const RootDrawerNavigator = createDrawerNavigator(
         alignItems: "center",
         alignSelf: "center",
         textAlign: "center",
-        width: vw(65),
+        width: vw(75),
         marginHorizontal: 5,
         paddingVertical: 10,
         paddingLeft: 30

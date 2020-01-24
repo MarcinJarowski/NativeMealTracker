@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { globalStyles, images } from "../styles/globalStyles";
+import DateNavigation from "../components/DateNavigation.js";
+import PieChartCircle from "../components/PieChart.js";
 
 export default function Planner() {
+  const chartData = [25, 35, 40];
   return (
     <View style={globalStyles.container}>
-      <Text>Planner View</Text>
+      <DateNavigation />
+      <View>
+        <PieChartCircle chartData={chartData} />
+      </View>
     </View>
   );
 }
