@@ -1,20 +1,17 @@
 import React, { useContext } from "react";
-import { StyleSheet, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet } from "react-native";
 import DateContextProvider from "./contexts/dateContext";
 import MealsContextProvider from "./contexts/mealsContext";
+import ShoppingListContextProvider from "./contexts/shoppingListContext";
 import Navigator from "./routes/menuDrawer";
 
 export default function App() {
   return (
     <DateContextProvider>
       <MealsContextProvider>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            Keyboard.dismiss();
-          }}
-        >
+        <ShoppingListContextProvider>
           <Navigator />
-        </TouchableWithoutFeedback>
+        </ShoppingListContextProvider>
       </MealsContextProvider>
     </DateContextProvider>
   );

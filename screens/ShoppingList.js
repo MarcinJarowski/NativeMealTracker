@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -7,19 +7,30 @@ import {
   TouchableOpacity,
   Keyboard,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
+  Button
 } from "react-native";
 import { globalStyles, images } from "../styles/globalStyles";
 import { TextInput } from "react-native-gesture-handler";
-import { vw } from "react-native-expo-viewport-units";
-import { AntDesign } from "@expo/vector-icons";
+import { vw, vh } from "react-native-expo-viewport-units";
+import { AntDesign, MaterialIcons, Feather } from "@expo/vector-icons";
 import FlatButton from "../components/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
+import uuid from "uuid";
+
+import { ShoppingListContext } from "../contexts/shoppingListContext";
 
 export default function ShoppingList() {
-  const [value, onChangeText] = React.useState("");
-  const [counterValue, setCounterValue] = React.useState(1);
+  const [counterValue, setCounterValue] = useState(1);
+  const {
+    itemsToBuy,
+    addToList,
+    setAlreadyInBasket,
+    itemsInBasket,
+    unsetAlreadyInBasket,
+    clearList
+  } = useContext(ShoppingListContext);
 
   const addToCounter = () => {
     let newValue = counterValue + 1;
@@ -37,6 +48,16 @@ export default function ShoppingList() {
       .required()
       .min(4)
   });
+  const addNewProduct = (values, actions) => {
+    const newProduct = {
+      name: values.productName,
+      count: counterValue,
+      key: uuid()
+    };
+    addToList(newProduct);
+    actions.resetForm();
+    setCounterValue(1);
+  };
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -50,9 +71,7 @@ export default function ShoppingList() {
               validationSchema={reviewSchema}
               initialValues={{ productName: "" }}
               onSubmit={(values, actions) => {
-                console.log(values.productName, counterValue);
-                actions.resetForm();
-                setCounterValue(1);
+                addNewProduct(values, actions);
               }}
             >
               {props => {
@@ -105,7 +124,44 @@ export default function ShoppingList() {
             </Formik>
           </View>
         </View>
-        <View style={styles.listWrapper}></View>
+        <ScrollView style={styles.listWrapper}>
+          <View style={styles.listUl}>
+            {itemsToBuy.map(item => {
+              const { key, name, count } = item;
+              return (
+                <View style={styles.listItem} key={key}>
+                  <Feather
+                    name="square"
+                    size={24}
+                    onPress={() => setAlreadyInBasket(key)}
+                    style={styles.itemIcon}
+                  />
+                  <Text style={styles.itemText}>{name}</Text>
+                  <Text style={styles.itemText}>{count}</Text>
+                </View>
+              );
+            })}
+            {itemsInBasket.map(item => {
+              const { key, name, count } = item;
+              return (
+                <View style={styles.listItem} key={key}>
+                  <MaterialIcons
+                    name="done"
+                    size={24}
+                    onPress={() => unsetAlreadyInBasket(key)}
+                    style={styles.itemIcon}
+                    color="#729283"
+                  />
+                  <Text style={styles.itemTextDone}>{name}</Text>
+                  <Text>{count}</Text>
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+        <View style={styles.footerBootons}>
+          <FlatButton textValue="Wyczyść listę" onPress={clearList} />
+        </View>
       </ScrollView>
     </TouchableWithoutFeedback>
   );
@@ -114,15 +170,45 @@ export default function ShoppingList() {
 const styles = StyleSheet.create({
   formWrapper: {
     width: vw(90),
+    height: vh(30),
     padding: vw(3)
   },
+  listUl: {
+    marginBottom: 10
+  },
   listWrapper: {
+    flex: 1,
     borderWidth: 1,
     borderColor: "#333",
     borderRadius: 12,
     marginVertical: 4,
     width: vw(90),
-    alignSelf: "center"
+    paddingVertical: vw(3),
+    height: vh(40),
+    alignSelf: "center",
+    overflow: "scroll"
+  },
+  listItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: vw(2.5),
+    marginVertical: 5,
+    marginHorizontal: vw(5),
+    height: 30,
+    textAlign: "center",
+    textDecorationLine: "line-through",
+    textDecorationStyle: "solid"
+  },
+  itemText: {
+    color: "#369AFF"
+  },
+  itemIcon: {
+    paddingRight: 20
+  },
+  itemTextDone: {
+    textDecorationLine: "line-through",
+    textDecorationStyle: "solid"
   },
   counter: {
     marginBottom: 20,

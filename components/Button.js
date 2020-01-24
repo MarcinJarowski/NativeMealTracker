@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { vw } from "react-native-expo-viewport-units";
 
-export default function FlatButton({ textValue, onPress, width }) {
+export default function FlatButton({ textValue, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
@@ -14,7 +14,7 @@ export default function FlatButton({ textValue, onPress, width }) {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
+    borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 10,
     backgroundColor: "#333",
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textTransform: "uppercase",
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold"
   }
 });
